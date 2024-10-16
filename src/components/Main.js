@@ -1,6 +1,11 @@
+import { useContext } from "react";
 import Timer from "./Timer";
+import { AppContext } from "./AppProvider";
 
-function Main({ questions, children, dispatch, index, points, answer, timer }) {
+function Main({ children }) {
+  const { questions, dispatch, index, points, answer, timer, totalPoints } =
+    useContext(AppContext);
+
   return (
     <div className="main">
       <header className="progress">
@@ -10,7 +15,7 @@ function Main({ questions, children, dispatch, index, points, answer, timer }) {
           Questions <strong>{index + 1}</strong>/{questions.length}
         </p>
         <p>
-          Questions <strong>{points}</strong>/280
+          Questions <strong>{points}</strong>/{totalPoints}
         </p>
       </header>
       {children}

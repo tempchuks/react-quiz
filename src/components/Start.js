@@ -1,4 +1,8 @@
-function Start({ questions, dispatch }) {
+import { useContext } from "react";
+import { AppContext } from "./AppProvider";
+
+function Start() {
+  const { questions, dispatch } = useContext(AppContext);
   return (
     <div className="start">
       <h2>Welcome to The React Quiz!</h2>

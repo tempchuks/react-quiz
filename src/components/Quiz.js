@@ -1,26 +1,30 @@
+import { useContext } from "react";
 import Options from "./Options";
-function Quiz({ question, dispatch, answer }) {
+import { AppContext } from "./AppProvider";
+function Quiz() {
+  const { questions, dispatch, answer, index } = useContext(AppContext);
   const hasAnswered = answer !== null;
-  function correctHandler(index) {
+  function correctHandler(indec) {
     dispatch({
       type: "answer",
-      payload: index === question.correctOption ? question.points : 0,
+      payload:
+        indec === questions[index].correctOption ? questions[index].points : 0,
     });
     dispatch({
       type: "correctAnswer",
-      payload: question.correctOption,
+      payload: questions[index].correctOption,
     });
   }
   return (
     <div>
-      <h4>{question.question}</h4>
+      <h4>{questions[index].question}</h4>
       <div className="options">
-        {question.options.map((v, i) => (
+        {questions[index].options.map((v, i) => (
           <Options
             correctHandler={correctHandler}
             v={v}
             i={i}
-            question={question}
+            question={questions[index]}
             dispatch={dispatch}
             key={i}
             hasAnswered={hasAnswered}
